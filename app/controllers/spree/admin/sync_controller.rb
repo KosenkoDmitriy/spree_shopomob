@@ -5,7 +5,7 @@ class Spree::Admin::SyncController < Spree::Admin::ResourceController
   helper_method :clone_object_url
   
   def index
-    @news = Spree::Sync.order("datetime(updated_at) DESC")
+    @news = Spree::Sync.order("updated_at DESC")
   end
   
   def new
