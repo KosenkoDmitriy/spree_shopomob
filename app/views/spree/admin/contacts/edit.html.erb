@@ -1,0 +1,39 @@
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back), admin_contacts_url, :icon => 'icon-arrow-left' %></li>
+  <% if can?(:create, Contact) %>
+    <li id="new_product_link">
+      <%= button_link_to Spree.t(:add), new_admin_contact_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @contact } %>
+
+<%= form_for([:admin, @contact]) do |f| %>
+  <%#= render "admin_form", :form => f %>
+  <p class="contact_image_name_field">
+    <%= f.label :image_Name %>
+    <%= f.text_field :imageName %>
+  </p>
+  <p class="contact_key_field">
+    <%= f.label :key %>
+    <%= f.text_field :key%>
+  </p>
+  <p class="contact_key_field">
+    <%= f.label :value %>
+    <%= f.text_field :value %>
+  </p>
+  <p class="contact_prefix_field">
+    <%= f.label :prefix %>
+    <%= f.text_field :prefix %>
+  </p>
+  <p class="contact_contact_type_field">
+    <%= f.label :contact_type %>
+    <%= f.text_field :contact_type %>
+  </p>
+  <p class="form-buttons">
+    <%= button t("update") %> <%= t('or') %> <%= link_to t('cancel'), collection_url %>
+  </p>
+<% end %>

@@ -1,0 +1,21 @@
+<% content_for :sub_menu do %>
+  <ul id="sub_nav" data-hook="admin_product_sub_tabs" class="inline-menu">
+    <%#= tab :news, :match_path => '/news' %>
+	<%= tab :about, :url => '/admin/about' %>
+	<%= tab :news, :url => '/admin/news' %>
+    <%= tab :sync, :url => '/admin/sync' %>
+    <%= tab :sms, :url => '/admin/sms' %>
+
+    <%#= tab :products, :url => '' %>
+	<%#= tab :orders, :url => '' %>
+	<%#= tab :wish_list, :url => '' %>
+		
+	<%= tab :contacts, :url => '/admin/contacts' %>
+	<%#= tab :map, :url => '' %>
+	<%#= tab :users, :url => '' %>
+	<%#= tab :stats, :url => '' %>
+
+    <%#= tab :push_notifications, :url => '/admin/news/push_notifications' %>
+    <%#= tab :sms, :url => '/admin/news/sms' %>
+  </ul>
+<% end %>

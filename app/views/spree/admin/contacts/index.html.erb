@@ -1,0 +1,57 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_contacts) %>
+<% end %>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:new_contact), new_admin_contact_url, :icon => 'icon-plus', :id => 'admin_new_contact' %>
+  </li>
+<% end if can? :edit, About.new %>
+
+
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+
+<%#=debug(@contacts)%>
+
+<% if !@contacts.empty? %>
+<div id="new_product_wrapper" data-hook></div>
+<table class="index" id="listing_products">
+    <colgroup>
+       <col style="width: 5%;">
+       <col style="width: 15%;">
+       <col style="width: 50%;">
+       <col style="width: 15%;">
+       <col style="width: 15%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th>#</th>
+        <th colspan="1"> <%=Spree.t(:contact_name)%></th>
+        <th> <%=Spree.t(:contact_value)%></th>
+		<th> <%=Spree.t(:contact_prefix)%></th>
+		<th> <%=Spree.t(:contact_type)%></th>
+        <th data-hook="admin_products_index_header_actions" class="actions"><%#=Spree.t(:table_actions)%><%#=Spree.t(:actions)%></th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @no = 0 %>
+		<%- @contacts.each do |newsItem|%>
+		<tr>
+			<td><%= @no+=1 %> <%#= newsItem.try(:id) %></td>
+			<td><%= link_to newsItem.try(:key), edit_admin_news_path(newsItem) %></td>
+            <td class="align-center"><%= newsItem.try(:value) %></td>
+			<td><%= newsItem.try(:prefix) %></td>
+			<td><%= newsItem.try(:contact_type) %></td>
+				
+            <td class="actions" data-hook="admin_products_index_row_actions">
+            <%= link_to_edit newsItem, :no_text => true, :class => 'edit' if can?(:edit, newsItem)  %>
+			&nbsp;
+			<%= link_to_delete newsItem, :no_text => true if can?(:delete, newsItem) %>
+			
+            </td>
+          </tr>
+		  
+		<% end %>
+		</tbody>
+</table>
+<% end %>
+

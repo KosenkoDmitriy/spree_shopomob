@@ -1,0 +1,42 @@
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @contact } %>
+
+<%= form_for [:admin, @contact], :html => { :multipart => true } do |f| %>
+  <fieldset data-hook="new_product">
+
+    <legend align="center"><%= Spree.t(:new_product) %></legend>
+
+    <%= f.field_container :key do %>
+      <%= f.label :key, Spree.t(:contact_name) %> <span class="required">*</span><br />
+      <%= f.text_field :key, :class => 'fullwidth title' %>
+      <%= f.error_message_on :key %>
+    <% end %>
+
+	<%= f.field_container :value do %>
+      <%= f.label :value, Spree.t(:contact_value) %> <span class="required">*</span><br />
+      <%= f.text_field :value, :class => 'fullwidth title' %>
+      <%= f.error_message_on :value %>
+    <% end %>
+	
+	<%= f.field_container :contact_type do %>
+      <%= f.label :contact_type, Spree.t(:contact_type) %> <span class="required">*</span><br />
+      <%= f.text_field :contact_type, :class => 'fullwidth title' %>
+      <%= f.error_message_on :contact_type %>
+    <% end %>
+	
+	<%= f.field_container :prefix do %>
+      <%= f.label :prefix, Spree.t(:contact_prefix) %> <span class="required">*</span><br />
+      <%= f.text_field :prefix, :class => 'fullwidth title' %>
+      <%= f.error_message_on :prefix %>
+    <% end %>
+	
+    <div class="clearfix" data-hook="product-from-prototype" id="product-from-prototype">
+      <%= render :file => 'spree/admin/prototypes/show' if @prototype %>
+    </div>
+
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+
+  </fieldset>
+<% end %>
+

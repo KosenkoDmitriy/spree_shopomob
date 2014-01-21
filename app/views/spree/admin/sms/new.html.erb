@@ -1,0 +1,41 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:sms) %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back_to_sms_list), collection_url, :icon => 'icon-arrow-left' %></li>
+  <% if can?(:create, Sms) %>
+    <li id="new_product_link">
+      <%= button_link_to Spree.t(:add_sms), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @sms } %>
+
+
+<fieldset data-hook="new_product">
+  <legend align="center"><%= Spree.t(:adding_sms) %></legend>
+    <%= render 'form', { :admin => @sms } %>
+
+    <%#= form_for "Sms", :html => { :multipart => true } do |f| %>
+
+    <%#= f.field_container :to do %>
+      <%#= f.label :to, Spree.t(:text) %>
+      <%#= f.text_field :to, :class => 'fullwidth title' %>
+      <%#= f.error_message_on :to %>
+    <%# end %>
+	
+	<%#= f.field_container :text do %>
+      <%#= f.label :text, Spree.t(:text) %>
+      <%#= f.text_area :text, {:rows => 10, :class => 'fullwidth'} %>
+      <%#= f.error_message_on :text %>
+    <% #end %>
+
+    <%#= render :partial => 'spree/admin/shared/new_resource_links' %>
+
+    <%#= render :partial => 'spree/admin/shared/new_resource_links' %>
+  <%# end %>
+</fieldset>

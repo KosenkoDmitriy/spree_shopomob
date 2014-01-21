@@ -1,0 +1,55 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+  spree:
+      news: "News"
+      about: "About"
+      title: "Title"
+      text: Text
+      updated_at: Update Date
+      created_at: Created Date
+      cancel: Cancel
+      back: Back
+      new_contact: New Contact
+      listing_contacts: Listing Contacts
+      contact_name: Contact Name
+      contact_value: Contact Value
+      contact_type: Contact Type
+      contact_prefix: Contact Prefix
+      no_images_found: No Images Found
+      add_news: Add News
+      no_news_found: NO NEWS FOUND
+      back_to_news_list: Back to News List
+      adding_news: Adding News Item
+      edit_news: Edit News Item
+
+      to: To
+      from: From
+      sms: SMS List
+      add_sms: Add SMS
+      no_sms_found: NO SMS FOUND
+      adding_sms: Adding SMS Message
+      back_to_sms_list: Back to SMS List
+      sms_sent_ok: SMS Sent Successfully
+      sms_not_sent: SMS Not Sent
+      edit_sms: Edit SMS
+
+      sms_server_not_available: SMS Server Not Available
+      unknown_error: Unknown Error
+
+      sms_no_money: no funds for sms campaign
+      status:
+        successfully: Successfully
+        error: Error
+      
+      app_id: Application ID. Reversed web site address (com.example.shop)
+      sync_options: Sync Options. What Models to sync (About,Contacts,Products)
+      sync: Sync Data
+      new_sync: New Sync
+      adding_sync: Adding Sync
+
+      edit_sync: Edit Sync
+      back_to_sync_list: Back To Sync List
+      

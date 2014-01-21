@@ -1,0 +1,49 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ru:
+  hello: "Привет Мир"
+  spree:
+      news: Новости
+      about: О компании
+      title: Загаловок
+      text: Описание
+      updated_at: Дата обновления
+      created_at: Дата создания
+      cancel: Отмена
+      back: Назад
+      new_contact: Добавить контакт
+      listing_contacts: Контакты
+      contact_name: Имя
+      contact_value: Значение
+      contact_type: Тип
+      contact_prefix: Префикс
+      no_images_found: Изображения не найдены
+      add_news: Добавить новость
+      no_news_found: Нет новостей
+      back_to_news_list: Назад к списку новостей
+      adding_news: Добавление новости
+      edit_news: Изменение новости
+
+      sms: СМС-сообщения
+      add_sms: Добавить СМС
+      no_sms_found: Нет СМС-сообщений
+      adding_sms: Добавление СМС-сообщения
+      back_to_sms_list: Назад к списку СМС-сообщений
+      sms_sent_ok: СМС успешно отправлено
+      sms_not_sent: СМС не послано
+      edit_sms: Редактирование СМС
+
+      sms_server_not_available: СМС Сервер не доступен
+      unknown_error: Неизвестная ошибка
+      sms_no_money: Недостаточно денег на рассылку
+      status:
+        successfully: успешно
+        error: ошибка
+      app_id: Идентификатор приложения ("com.example.shop")
+      sync_options: Опции синхронизации. Какие разделы синхронизировать через запяту (About,Contacts,Products)
+
+      sync: Синхронизация данных
+      new_sync: Создать синхронизацию
+      edit_sync: Редактировать Синхронизацию
+      back_to_sync_list: Назад ко всем синхронизациям

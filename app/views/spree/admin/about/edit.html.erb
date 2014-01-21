@@ -1,0 +1,39 @@
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back), collection_url, :icon => 'icon-arrow-left' %></li>
+  <% if can?(:create, News) %>
+    <li id="new_product_link">
+      <%#= button_link_to Spree.t(:edit), new_admin_about_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+<%#= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Product Details' } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @about } %>
+
+<%= form_for([:admin, @about]) do |f| %>
+  <p class="review_title_field">
+    <%= f.label :title %>
+    <%= f.text_field :title, :class => 'fullwidth title'%>
+  </p>
+  <p class="review_text_field">
+    <%= f.label :text %>
+    <%#= f.text_field :text, :class => 'fullwidth title' %>
+	<%= f.text_area :text, {:rows => 10, :class => 'fullwidth'} %>
+  </p>
+ <p class="review_text_field">
+    <%#= f.label :image_Name %>
+    <%#= f.text_field :imageName, :class => 'fullwidth title'%>
+  </p>
+  
+<br />
+
+ <p class="form-buttons">
+    <%#= f.submit Spree. t("update") %> <%#= t('or') %> 
+  </p>
+  <p class="form-buttons">
+    <%= button t("update") %> <%= t('or') %> <%#= link_to t('cancel'), "/admin/about" %> <%= link_to t('cancel'), collection_url %>
+  </p>
+<% end %>
+
+

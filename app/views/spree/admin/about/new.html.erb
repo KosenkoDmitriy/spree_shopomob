@@ -1,0 +1,41 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:about) %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+
+<% content_for :page_actions do %>
+  <li><%#= button_link_to Spree.t(:cancel), collection_url, :icon => 'icon-arrow-left' %></li>
+  <% if can?(:create, About) %>
+    <li id="new_product_link">
+      <%#= button_link_to Spree.t(:add_news), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+    </li>
+  <% end %>
+<% end %>
+
+<%#= render 'form', { :news => @newsItem } %>
+
+<%= form_for [:admin, @object], :url => '/admin/about', :html => { :multipart => true } do |f| %>
+	<fieldset data-hook="new_product">
+
+    <legend align="center"><%= Spree.t(:about) %></legend>
+
+    <%= f.field_container :title do %>
+      <%= f.label :title, Spree.t(:title) %> <span class="required">*</span><br />
+      <%= f.text_field :title, :class => 'fullwidth title' %>
+      <%= f.error_message_on :title %>
+    <% end %>
+	
+	<%= f.field_container :text do %>
+      <%= f.label :text, Spree.t(:text) %>
+      <%= f.text_area :text, {:rows => 10, :class => 'fullwidth'} %>
+      <%= f.error_message_on :text %>
+    <% end %>
+	
+	    <%#= render :partial => 'spree/admin/shared/edit_resource_links' %>
+	<p class="form-buttons">
+		<%= f.submit Spree. t("update") %> <%= t('or') %> <%= link_to t('cancel'), "/admin/about" %>
+	</p>
+
+	</fieldset>
+<% end %>

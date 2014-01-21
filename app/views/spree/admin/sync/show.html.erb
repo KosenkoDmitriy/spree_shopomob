@@ -1,0 +1,28 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:sync) %>
+<% end %>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:new_sync), collection_url, :icon => 'icon-plus', :id => 'admin_new_order' %>
+  </li>
+<% end if can? :edit, News.new %>
+
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+
+<div id="new_product_wrapper" data-hook></div>
+
+<% if !@newsItem.blank? %>
+	<p><%= newsItem.try(:id) %></p>
+	<p><%=Spree.t(:title)%><%= link_to newsItem.try(:title), edit_admin_news_path(newsItem) %></p>
+	<p><%=Spree.t(:text)%><%= newsItem.text %></p>
+	<p><%=Spree.t(:updated_at)%><%= newsItem.try(:created_at) %></p>
+	<p><%=Spree.t(:created_at)%><%= newsItem.try(:updated_at) %></p>
+	<p><%=Spree.t(:app_id)%><%= newsItem.try(:app_id) %></p>
+	<p><%=Spree.t(:sync_options)%><%= newsItem.try(:options) %></p>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_news_found) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_sync_path %>!
+  </div>
+<% end %>
+

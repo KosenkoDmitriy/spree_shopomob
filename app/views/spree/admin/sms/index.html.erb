@@ -1,0 +1,64 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:sms) %>
+<% end %>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:add_sms), new_object_url, :icon => 'icon-plus', :id => 'admin_new_order' %>
+  </li>
+<% end if can? :edit, Sms.new %>
+
+<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
+
+<div id="new_product_wrapper" data-hook></div>
+
+<% if @sms.any? %>
+<table class="index" id="listing_products">
+    <colgroup>
+       <col style="width: 5%;">
+       <col style="width: 55%;">
+       <col style="width: 10%;">
+       <col style="width: 10%;">
+       <col style="width: 10%;">
+       <col style="width: 10%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th>#</th>
+        <th> <%=Spree.t(:text)%></th>
+        <th> <%=Spree.t(:to)%></th>
+        <th> <%=Spree.t(:from)%></th>
+		<th> <%=Spree.t(:created_at)%></th>
+        <th> <%=Spree.t(:updated_at)%></th>
+        <th data-hook="admin_products_index_header_actions" class="actions"><%#=Spree.t(:table_actions)%><%#=Spree.t(:actions)%></th>
+      </tr>
+    </thead>
+    <tbody>
+		<%- @sms.each do |newsItem|%>
+		<tr>
+			<td><%= newsItem.try(:id) %></td>
+			<td class="align-center"><%= link_to newsItem.try(:text), edit_admin_sm_path(newsItem) %></td>
+            <td class="align-center"><%= newsItem.to %></td>
+            <td class="align-center"><%= newsItem.from %></td>
+			<td class="align-center"><%= newsItem.try(:created_at) %></td>
+			<td class="align-center"><%= newsItem.try(:updated_at) %></td>
+				
+            <td class="actions" data-hook="admin_products_index_row_actions">
+            <%= link_to_edit newsItem, :no_text => true, :class => 'edit' if can?(:edit, newsItem)  %>
+			&nbsp;
+			<%= link_to_delete newsItem, :no_text => true if can?(:delete, newsItem) %>
+			&nbsp;
+            <%#= link_to_clone newsItem, :no_text => true, :class => 'clone' if can?(:clone, newsItem) %>
+
+            </td>
+          </tr>
+		  
+		<% end %>
+		</tbody>
+</table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_sms_found) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+<% end %>
+
