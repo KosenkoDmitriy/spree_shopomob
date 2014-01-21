@@ -7,18 +7,19 @@
     <p class="review_text_field">
     <%= f.label :from %> <span class="required">*</span><br />
     <%= f.text_field :from, :class => 'fullwidth from' %>
-  </p>
-  <p class="review_title_field">
+    </p>
+    <p class="review_title_field">
     <%= f.label :to %> <span class="required">*</span><br />
     <%= f.text_area :to, :class => 'fullwidth to' %>
-  </p>
-  <p class="review_text_field">
+    </p>
+    <p class="review_text_field">
     <%= f.label :text %> <span class="required">*</span><br />
     <%= f.text_area :text, {:rows => 10, :class => 'fullwidth text'} %>
-  </p>
+    </p>
 
-    <p class="review_text_field">userapp
-      <%= text_field "userapp", "id", {:class => 'fullwidth text'}  %>
+    <p class="review_text_field">
+      <%= f.label :userapp %> <span class="required">*</span><br />
+      <%= f.text_field :userapp, :class => 'fullwidth userapp' %>
     </p>
 
     <div class="form-buttons filter-actions actions" data-hook="buttons">

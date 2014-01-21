@@ -6,13 +6,11 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
   helper_method :clone_object_url
 
   def index
-    @sms = Sms.order("datetime(updated_at) DESC")
+    @news = Sms.order("updated_at DESC")
   end
 
   def new
-#    @review = Spree::Review.new(:title => params[:title], :text => params[:text])
-    @sms = Sms.new #(news_params);
-    #@newsItem = News.new #(news_params);
+    @sms = Sms.new
   end
 
   def edit
@@ -23,54 +21,24 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
 
   def update
     @sms = Sms.new( news_params )
-
     if @sms.save
+      sent_sms
       redirect_to action:"index"
     else
       render :action => "edit"
     end
-
   end
 
   def create
-
 #    @newsItem = News.create(:title=>params[:title], :text => params[:text])
-    @params = params
-    @userapp = params["userapp"]["id"]
     @sms = Sms.new( news_params )
-    result = sent_message_to_epochta_ru (@sms)
-    if (result['result'])
-      flash[:success] = Spree.t('status.successfully')
-      if @sms.save
-        #sent_message_to_sms_gt ( @sms )
-        #redirect_to admin_sms_path
-        redirect_to action:"index"
-        return
-      else
-        render :action => "new"
-      end
-    elsif (result['error'])
-      flash[:error] = Spree.t('status.error') + result['error'].to_s
+    if @sms.save
+      sent_sms
+      redirect_to action:"index"
+    else
       render :action => "new"
     end
   end
-
-#  def show
-#        session[:return_to] ||= request.referer
-#        redirect_to( :action => :edit )
-#      end
-
-#  def clone
-#    @new = @newsItem.duplicate
-#
-#    if @new.save
-#      flash[:success] = Spree.t('notice_messages.product_cloned')
-#    else
-#      flash[:success] = Spree.t('notice_messages.product_not_cloned')
-#    end
-#
-#    redirect_to edit_admin_news_url(@new)
-#  end
 
   private
 
@@ -79,7 +47,7 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
   end
 
   def news_params
-    params.require(:sms).permit(:from, :to, :text, :id)
+    params.require(:sms).permit(:from, :to, :text, :id, :delivered, :userapp)
   end
 
   def collection_url
@@ -90,19 +58,6 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
     "#{controller_name.classify}s".constantize
   end
 
-#    def model_name
-#      parent_data[:model_name].gsub('spree/', '')
-#    end
-##
-#    def object_name
-#      controller_name.singularize
-#    end
-
-
-#    def location_after_new
-#      spree.admin_news_url(@newsItem)
-#    end
-
   def location_after_save
     spree.edit_admin_news_url(@newsItem)
   end
@@ -110,6 +65,22 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
 
   def clone_object_url resource
     clone_admin_news_url resource
+  end
+
+  def sent_sms
+    begin
+      result = sent_message_to_epochta_ru (@sms)
+      if (result['result'])
+        flash[:success] = Spree.t('status.successfully')
+      elsif (result['error'])
+        flash[:error] = Spree.t('status.error') + ":" + result['error'].to_s
+        render :action => "new"
+      end
+    rescue Errno::EADDRNOTAVAIL
+      flash[:error] = Spree.t('sms_server_not_available') + ". " + Spree.t('sms_not_sent')
+    rescue
+      flash[:error] = Spree.t('unknown_error') + ". " + Spree.t('sms_not_sent')
+    end
   end
 
   def sent_message_to_epochta_ru( sms )
@@ -206,10 +177,10 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
       batchinterval = '0' #(0 = разослать за одну итерацию) Для рассылки по частям – интервал между отправками
       sms_lifetime = '0' #Время жизни смс (0 = максимум)
       control_phone = '' #Контрольный номер телефона. Контроль качества. Задается в международном виде.
-      #@userapp = 'adec' #Идентификатор приложения
+      @userapp = sms.userapp #'adec' #Идентификатор приложения
       #http://atompark.com/api/sms/3.0/createCampaign?key=public_key&sum=control_sum&sender=Info&text=Testing%20SMS&list_id=1234&datetime=&batch=0&batchinterval=0&sms_lifetime=0&controlnumber=
       create_campaign_control_sum_params = {"version"=>@sms_api_version, "action"=>"createCampaign", "key"=>@sms_key_public, "sender"=>@sender, "text"=>@text, "list_id"=>@list_id, "datetime"=>datetime, "batch"=>batch, "batchinterval"=>batchinterval, "sms_lifetime"=>sms_lifetime, "controlnumber"=>control_phone, "test"=>@testMode}
-      json = createc_campaign ( create_campaign_control_sum_params )
+      json = create_campaign ( create_campaign_control_sum_params )
       if (json["result"])
         create_campaign_price = json["result"]["price"]
         create_campaign_id = json["result"]["id"]
@@ -279,7 +250,7 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
   end
 
 
-  def createc_campaign sms_params
+  def create_campaign sms_params
     control_sum_md5 = calculate_control_sum (sms_params)
     #http://atompark.com/api/sms/3.0/createCampaign?key=public_key&sum=control_sum&sender=Info&text=Testing%20SMS&list_id=1234                                                                                                          &datetime=&batch=0&batchinterval=0&sms_lifetime=0&controlnumber=
     encode_url = URI.encode("#{@URL_GAREWAY}/#{sms_params['version']}/#{sms_params['action']}?key=#{sms_params['key']}&sum=#{control_sum_md5}&sender=#{sms_params['sender']}&text=#{sms_params['text']}&list_id=#{sms_params['list_id']}&datetime=#{sms_params['datetime']}&batch=#{sms_params['batch']}&batchinterval=#{sms_params['batchinterval']}&sms_lifetime=#{sms_params['sms_lifetime']}&controlnumber=#{sms_params['controlnumber']}&test=#{sms_params['test']}&userapp=#{@userapp}")

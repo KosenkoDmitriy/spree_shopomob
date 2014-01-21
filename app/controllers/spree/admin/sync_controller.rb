@@ -23,11 +23,41 @@ class Spree::Admin::SyncController < Spree::Admin::ResourceController
 #    @newsItem = News.create(:title=>params[:title], :text => params[:text])
     @params = params
     @newsItem = Spree::Sync.new ( sync_params )
+
     if @newsItem.save
-      flash[:notice] = t('news_successfully_submitted')
-      #redirect_to ("index") #(product_path(@product))
-      
-#      url = URI.parse('http://localhost:3000/notification/push/sync')
+      notify
+      redirect_to action:"index"
+    else
+      render :action => "new"
+    end
+  end
+
+  def update
+    @newsItem = Spree::Sync.new ( sync_params )
+
+    if @newsItem.save
+      notify
+      redirect_to action:"index"
+    else
+      render :action => "new"
+    end
+  end
+
+
+  private
+  def collection_url
+    '/admin/sync'
+  end
+
+  def sync_params
+    params.require(:sync).permit(:title, :text, :options, :app_id)
+  end
+
+  def notify
+    begin
+      # problematic code
+
+      #      url = URI.parse('http://localhost:3000/notification/push/sync')
       url = URI.parse('http://glacial-ridge-3064.herokuapp.com/notification/push/sync')
       request = Net::HTTP::Post.new(url.path)
       request.content_type = 'application/json'
@@ -35,20 +65,16 @@ class Spree::Admin::SyncController < Spree::Admin::ResourceController
       request.body = data.to_json
       response = Net::HTTP.start(url.host, url.port) {|http| http.request(request) }
 
-      redirect_to action:"index"
-#      redirect_to news_path
-    else
-      render :action => "new"
+      flash[:notice] = Spree.t('status.successfully')
+
+    rescue Errno::EHOSTUNREACH
+      flash[:error] = Spree.t('news_server_not_available') + ". " + Spree.t('sync_error') + "."
+        # log the error
+        # let the User know
+    rescue
+      # handle other exceptions
+      flash[:error] = Spree.t('unknown_error') + ". " + Spree.t('sync_error') + "."
     end
   end
-  
-  private
-    def collection_url
-      '/admin/sync'
-    end
-  
-    def sync_params
-      params.require(:sync).permit(:title, :text, :options, :app_id)
-    end
 
 end

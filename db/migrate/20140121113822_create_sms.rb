@@ -4,6 +4,8 @@ class CreateSms < ActiveRecord::Migration
       t.string :to
       t.text :from
       t.string :text
+      t.string :userapp
+      t.boolean :delivered
 
       t.timestamps
     end

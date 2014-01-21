@@ -5,11 +5,10 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
   helper_method :clone_object_url
   
   def index
-    @news = News.order("datetime(updated_at) DESC")
+    @news = News.order("updated_at DESC")
   end
   
-   def new
-#    @review = Spree::Review.new(:title => params[:title], :text => params[:text])
+  def new
     @newsItem = News.new #(news_params);
   end
   
@@ -17,41 +16,25 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
 #    @newsItem = News.create(:title=>params[:title], :text => params[:text])
     @params = params
     @newsItem = News.new ( news_params )
-    if @newsItem.save
-      flash[:notice] = t('news_successfully_submitted')
-      #redirect_to ("index") #(product_path(@product))
-      
-#      url = URI.parse('http://localhost:3000/notification/push/news')
-      url = URI.parse('http://glacial-ridge-3064.herokuapp.com/notification/push/news')
-      request = Net::HTTP::Post.new(url.path)
-      request.content_type = 'application/json'
-      data = {'title' => @newsItem.title, 'text' => @newsItem.text, 'app'=> {'android'=>'name.adec.android.shop', 'ios'=>'name.adec.ios.shop'}}
-      request.body = data.to_json
-      response = Net::HTTP.start(url.host, url.port) {|http| http.request(request) }
 
+    if @newsItem.save
+      notify
       redirect_to action:"index"
-#      redirect_to news_path
     else
       render :action => "new"
     end
   end
-  
-#  def show
-#        session[:return_to] ||= request.referer
-#        redirect_to( :action => :edit )
-#      end
-  
-#  def clone
-#    @new = @newsItem.duplicate
-#
-#    if @new.save
-#      flash[:success] = Spree.t('notice_messages.product_cloned')
-#    else
-#      flash[:success] = Spree.t('notice_messages.product_not_cloned')
-#    end
-#
-#    redirect_to edit_admin_news_url(@new)
-#  end
+
+  def update
+    @newsItem = News.new ( news_params )
+
+    if @newsItem.save
+      notify
+      redirect_to action:"index"
+    else
+      render :action => "new"
+    end
+  end
   
   private
   
@@ -67,26 +50,35 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
     "#{controller_name.classify}".constantize
   end
 
-#    def model_name
-#      parent_data[:model_name].gsub('spree/', '')
-#    end
-##
-#    def object_name
-#      controller_name.singularize
-#    end
-
-  
-#    def location_after_new
-#      spree.admin_news_url(@newsItem)
-#    end
-    
   def location_after_save
     spree.edit_admin_news_url(@newsItem)
   end
-  
 
   def clone_object_url resource
     clone_admin_news_url resource
   end
-      
+
+  def notify
+    begin
+      # problematic code
+
+      #url = URI.parse('http://localhost:3000/notification/push/news')
+      url = URI.parse('http://glacial-ridge-3064.herokuapp.com/notification/push/news')
+      request = Net::HTTP::Post.new(url.path)
+      request.content_type = 'application/json'
+      data = {'title' => @newsItem.title, 'text' => @newsItem.text, 'app'=> {'android'=>'name.adec.android.shop', 'ios'=>'name.adec.ios.shop'}}
+      request.body = data.to_json
+      response = Net::HTTP.start(url.host, url.port) {|http| http.request(request) }
+      flash[:notice] = Spree.t('news_sent')
+
+    rescue Errno::EHOSTUNREACH
+      flash[:error] = Spree.t('news_server_not_available') + ". " + Spree.t('news_not_sent') + "."
+        # log the error
+        # let the User know
+    rescue
+      # handle other exceptions
+      flash[:error] = Spree.t('unknown_error') + ". " + Spree.t('news_not_sent') + "."
+    end
+  end
+
 end

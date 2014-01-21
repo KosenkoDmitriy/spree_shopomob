@@ -24,6 +24,11 @@ ru:
       back_to_news_list: Назад к списку новостей
       adding_news: Добавление новости
       edit_news: Изменение новости
+      news_not_sent: Ошибка отсылки новости
+      news_server_not_available: Новостной сервер в данный момент не доступен
+      news_sent: Новость отправлена успешно
+      news_not_sent: Новость не послана
+      news_updated: Новость обновлена
 
       sms: СМС-сообщения
       add_sms: Добавить СМС
@@ -42,6 +47,7 @@ ru:
         error: ошибка
       app_id: Идентификатор приложения ("com.example.shop")
       sync_options: Опции синхронизации. Какие разделы синхронизировать через запяту (About,Contacts,Products)
+      sync_error: Ошибка Синхронизации
 
       sync: Синхронизация данных
       new_sync: Создать синхронизацию

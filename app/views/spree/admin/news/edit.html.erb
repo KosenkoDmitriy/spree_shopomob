@@ -14,7 +14,7 @@
 <%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @contact } %>
 
-<%= form_for [:admin, @newsItem], :html => { :multipart => true } do |f| %>
+<%= form_for [:admin, @newsItem], :html => { :multipart => true, :method => :put } do |f| %>
   <fieldset data-hook="new_product">
 
     <legend align="center"><%= Spree.t(:edit_news) %></legend>

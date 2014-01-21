@@ -24,6 +24,11 @@ en:
       back_to_news_list: Back to News List
       adding_news: Adding News Item
       edit_news: Edit News Item
+      news_not_sent: Error Sending News Item
+      news_server_not_available: News Server Currently Not Available
+      news_sent: News Sent
+      news_not_sent: News not sent
+      news_updated: News Updated
 
       to: To
       from: From
@@ -49,7 +54,7 @@ en:
       sync: Sync Data
       new_sync: New Sync
       adding_sync: Adding Sync
+      sync_error: Sync Error
 
       edit_sync: Edit Sync
       back_to_sync_list: Back To Sync List
-      
