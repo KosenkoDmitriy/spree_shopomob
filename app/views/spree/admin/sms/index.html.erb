@@ -5,7 +5,7 @@
   <li>
     <%= button_link_to Spree.t(:add_sms), new_object_url, :icon => 'icon-plus', :id => 'admin_new_order' %>
   </li>
-<% end if can? :edit, Sms.new %>
+<% end if can? :edit, Spree::Sms.new %>
 
 <%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
 

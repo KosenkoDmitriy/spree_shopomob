@@ -6,7 +6,7 @@
 
 <% content_for :page_actions do %>
   <li><%= button_link_to Spree.t(:back_to_news_list), collection_url, :icon => 'icon-arrow-left' %></li>
-  <% if can?(:create, News) %>
+  <% if can?(:create, Spree::News) %>
     <li id="new_product_link">
       <%= button_link_to Spree.t(:add_news), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
     </li>

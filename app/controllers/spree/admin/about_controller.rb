@@ -1,7 +1,7 @@
 class Spree::Admin::AboutController < Spree::Admin::ResourceController #ApplicationController
   
   def index
-    @about = About.last
+    @about = Spree::About.last
     if (@about) 
       @edit_about_url = collection_url + "/" + @about.id.to_s + "/edit"
     end
@@ -11,10 +11,10 @@ class Spree::Admin::AboutController < Spree::Admin::ResourceController #Applicat
 #
 #  
 #  def create
-##    @aboutOld = About.find(abouts_params)
-##    @about = About.new(abouts_params)
+##    @aboutOld = Spree::About.find(abouts_params)
+##    @about = Spree::About.new(abouts_params)
 ##    if (@about.title == @aboutOld.text && @about.title == @aboutOld.title)
-#    if About.create(abouts_params)
+#    if Spree::About.create(abouts_params)
 #        redirect_to action:"index"
 #    else
 #        redirect_to action:"new"
@@ -22,20 +22,20 @@ class Spree::Admin::AboutController < Spree::Admin::ResourceController #Applicat
 #  end
 
   private
-  def model_class
-    "#{controller_name.classify}".constantize
-  end
+#  def model_class
+#    "#{controller_name.classify}".constantize
+#  end
   
-  def object_name
-    "about"
-  end
+#  def object_name
+#    "about"
+#  end
   
   def abouts_params
     params.require(:about).permit(:title, :text) #.permit(:username, :email, :password, :salt, :encrypted_password)
   end
   
 #  def find_resource
-#      @aboutLast = News.find_by(:id => params[:id])
+#      @aboutLast = Spree::About.find_by(:id => params[:id])
 #  end
    def collection_url(options = {})
 #      if parent_data.present?

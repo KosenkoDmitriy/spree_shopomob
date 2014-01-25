@@ -5,17 +5,17 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
   helper_method :clone_object_url
   
   def index
-    @news = News.order("updated_at DESC")
+    @news = Spree::News.order("updated_at DESC")
   end
   
   def new
-    @newsItem = News.new #(news_params);
+    @newsItem = Spree::News.new
   end
   
   def create
 #    @newsItem = News.create(:title=>params[:title], :text => params[:text])
     @params = params
-    @newsItem = News.new ( news_params )
+    @newsItem = Spree::News.new ( news_params )
 
     if @newsItem.save
       notify
@@ -26,29 +26,31 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
   end
 
   def update
-    @newsItem = News.new ( news_params )
-
-    if @newsItem.save
-      notify
-      redirect_to action:"index"
-    else
-      render :action => "new"
+    if (params['id'].present? && !params['id'].blank?)
+      @newsItem = Spree::News.find(params['id'])
+      @newsItem.attributes = news_params
+      if @newsItem.save #Spree::News.update(params['id'], news_params)
+        notify
+        redirect_to action:"index"
+      else
+        render :action => "new"
+      end
     end
   end
   
   private
   
   def find_resource
-    @newsItem = News.find_by(:id => params[:id])
+    @newsItem = Spree::News.find_by(:id => params[:id])
   end
       
   def news_params
-    params.require(:news).permit(:title, :text) #.permit(:username, :email, :password, :salt, :encrypted_password)
+    params.require(:news).permit(:id, :imgName, :title, :text) #.permit(:username, :email, :password, :salt, :encrypted_password)
   end
 
-  def model_class
-    "#{controller_name.classify}".constantize
-  end
+#  def model_class
+#    "#{controller_name.classify}".constantize
+#  end
 
   def location_after_save
     spree.edit_admin_news_url(@newsItem)

@@ -5,7 +5,7 @@
 <%= form_for [:admin, @contact], :html => { :multipart => true } do |f| %>
   <fieldset data-hook="new_product">
 
-    <legend align="center"><%= Spree.t(:new_product) %></legend>
+    <legend align="center"><%= Spree.t(:new_contact) %></legend>
 
     <%= f.field_container :key do %>
       <%= f.label :key, Spree.t(:contact_name) %> <span class="required">*</span><br />

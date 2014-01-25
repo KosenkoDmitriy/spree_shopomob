@@ -33,14 +33,18 @@ class Spree::Admin::SyncController < Spree::Admin::ResourceController
   end
 
   def update
-    @newsItem = Spree::Sync.new ( sync_params )
 
-    if @newsItem.save
-      notify
-      redirect_to action:"index"
-    else
-      render :action => "new"
+    if (params['id'].present? && !params['id'].blank?)
+      @newsItem = Spree::Sync.find(params['id'])
+      @newsItem.attributes = sync_params
+      if @newsItem.save
+        notify
+        redirect_to action:"index"
+      else
+        render :action => "new"
+      end
     end
+
   end
 
 

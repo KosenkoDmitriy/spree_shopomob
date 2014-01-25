@@ -6,32 +6,36 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
   helper_method :clone_object_url
 
   def index
-    @news = Sms.order("updated_at DESC")
+    @sms = Spree::Sms.order("updated_at DESC")
   end
 
   def new
-    @sms = Sms.new
+    @sms = Spree::Sms.new
   end
 
   def edit
-    if (!params['id'].blank?)
-      @sms = Sms.find_by(:id=>params['id'] )
+    if (params['id'].present? && !params['id'].blank?)
+      @sms = Spree::Sms.find(params['id'])
     end
   end
 
   def update
-    @sms = Sms.new( news_params )
-    if @sms.save
-      sent_sms
-      redirect_to action:"index"
-    else
-      render :action => "edit"
+
+    if (params['id'].present? && !params['id'].blank?)
+      @sms = Spree::Sms.find(params['id'])
+      @sms.attributes = news_params
+      if @sms.save
+        sent_sms
+        redirect_to action:"index"
+      else
+        render :action => "new"
+      end
     end
+
   end
 
   def create
-#    @newsItem = News.create(:title=>params[:title], :text => params[:text])
-    @sms = Sms.new( news_params )
+    @sms = Spree::Sms.new( news_params )
     if @sms.save
       sent_sms
       redirect_to action:"index"
@@ -43,7 +47,7 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
   private
 
   def find_resource
-    @newsItem = Sms.find_by(:id => params[:id])
+    @newsItem = Spree::Sms.find_by(:id => params[:id])
   end
 
   def news_params
@@ -55,7 +59,7 @@ class Spree::Admin::SmsController < Spree::Admin::ResourceController
   end
 
   def model_class
-    "#{controller_name.classify}s".constantize
+    "Spree::#{controller_name.classify}s".constantize
   end
 
   def location_after_save

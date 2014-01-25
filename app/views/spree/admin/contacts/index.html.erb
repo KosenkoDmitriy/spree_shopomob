@@ -5,7 +5,7 @@
   <li>
     <%= button_link_to Spree.t(:new_contact), new_admin_contact_url, :icon => 'icon-plus', :id => 'admin_new_contact' %>
   </li>
-<% end if can? :edit, About.new %>
+<% end if can? :edit, Spree::Contact.new %>
 
 
 <%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
