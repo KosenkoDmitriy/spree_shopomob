@@ -8,7 +8,7 @@ source 'https://rubygems.org'
 
 gem 'spree', path: '../spree', branch: '2-1-stable'
 gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '2-1-stable'
-gem 'spree_multi_tenant', git: "git://github.com/KosenkoDmitriy/spree_multi_tenant.git", branch: '2-1-stable'
+gem 'spree_multi_tenant', git: 'git://github.com/KosenkoDmitriy/spree_multi_tenant.git', branch: '2-1-stable'
 
 
 gemspec
