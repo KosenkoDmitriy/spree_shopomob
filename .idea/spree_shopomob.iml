@@ -137,7 +137,6 @@
     <orderEntry type="library" scope="PROVIDED" name="spree_backend (v[path], /Users/dmitrij/Dev/prj/rails/spree_repos/spree/backend) [path][gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_cmd (v[path], /Users/dmitrij/Dev/prj/rails/spree_repos/spree/cmd) [path][gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_frontend (v[path], /Users/dmitrij/Dev/prj/rails/spree_repos/spree/frontend) [path][gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="spree_multi_tenant (v0.3.0, /Users/dmitrij/Dev/prj/rails/spree_repos/spree_multi_tenant_my_fork) [path][gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_sample (v[path], /Users/dmitrij/Dev/prj/rails/spree_repos/spree/sample) [path][gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_shopomob (v2.1.3, /Users/dmitrij/Dev/prj/rails/spree_repos/spree_shopomob) [path][gem]" level="application" />
   </component>
