@@ -1,5 +1,5 @@
 object false
-child(@taxons => :news) do
+child(@taxons => :taxons) do
  extends "spree/api/categories/show"
 end
 
