@@ -15,6 +15,7 @@ Spree::Core::Engine.routes.append do
     resources :about
     resources :contacts
     resources :news
+    resources :categories
   end
   
 end
