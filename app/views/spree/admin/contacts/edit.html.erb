@@ -21,6 +21,12 @@
         <%#= f.text_field :imageName, :class => 'fullwidth title' %>
         <%#= f.error_message_on :imageName %>
       </p>
+      <p class="contact_type">
+        <%= f.label :contact_type %>
+        <%#= f.text_field :contact_type, :class => 'fullwidth title' %>
+        <%= f.select :contact_type,  @contact_types, { selected: f.object.attributes['contact_type']+","+f.object.attributes['prefix'] }, {:class => 'select2 fullwidth'} %>
+        <%= f.error_message_on :contact_type %>
+      </p>
       <p class="key">
         <%= f.label :key %>
         <%= f.text_field :key, :class => 'fullwidth title'%>
@@ -31,16 +37,12 @@
         <%= f.text_field :value, :class => 'fullwidth title'%>
         <%= f.error_message_on :value %>
       </p>
-      <p class="prefix">
-        <%= f.label :prefix %>
-        <%= f.text_field :prefix, :class => 'fullwidth title' %>
-        <%= f.error_message_on :prefix %>
-      </p>
-      <p class="contact_type">
-        <%= f.label :contact_type %>
-        <%= f.text_field :contact_type, :class => 'fullwidth title' %>
-        <%= f.error_message_on :contact_type %>
-      </p>
+      <!--<p class="prefix">
+        <%#= f.label :prefix %>
+        <%#= f.text_field :prefix, :class => 'fullwidth title' %>
+        <%#= f.error_message_on :prefix %>
+      </p>-->
+
       <br>
       <p class="form-buttons">
         <%= button t("update") %> <%= t('or') %> <%= link_to t('cancel'), collection_url %>

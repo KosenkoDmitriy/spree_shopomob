@@ -1,35 +1,38 @@
 <%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
 
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @contact } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @item } %>
 
-<%= form_for [:admin, @contact], :html => { :multipart => true } do |f| %>
+<%= form_for [:admin, @item], :html => { :multipart => true } do |f| %>
   <fieldset data-hook="new_product">
 
     <legend align="center"><%= Spree.t(:new_contact) %></legend>
+    <%#= f.select(:option, options_for_select([['All', 1], ['Co', 2], ['Bought', 3], ['View', 4], ['Top API', 5]], :selected => params[:option])) %>
+
+    <%= f.field_container :contact_type do %>
+        <%= f.label :contact_type, Spree.t(:contact_type) %> <span class="required">*</span><br />
+        <%#= f.text_field :contact_type, :class => 'fullwidth title' %>
+        <%= f.select :contact_type, @contact_types, {}, {:class => 'select2 fullwidth'} %>
+        <%= f.error_message_on :contact_type %>
+    <% end %>
 
     <%= f.field_container :key do %>
-      <%= f.label :key, Spree.t(:contact_name) %> <span class="required">*</span><br />
-      <%= f.text_field :key, :class => 'fullwidth title' %>
-      <%= f.error_message_on :key %>
+        <%= f.label :key, Spree.t(:contact_name) %> <span class="required">*</span><br />
+        <%= f.text_field :key, :class => 'fullwidth title' %>
+        <%= f.error_message_on :key %>
     <% end %>
 
 	<%= f.field_container :value do %>
-      <%= f.label :value, Spree.t(:contact_value) %> <span class="required">*</span><br />
-      <%= f.text_field :value, :class => 'fullwidth title' %>
-      <%= f.error_message_on :value %>
+        <%= f.label :value, Spree.t(:contact_value) %> <span class="required">*</span><br />
+        <%= f.text_field :value, :class => 'fullwidth title' %>
+        <%= f.error_message_on :value %>
     <% end %>
 	
-	<%= f.field_container :contact_type do %>
-      <%= f.label :contact_type, Spree.t(:contact_type) %> <span class="required">*</span><br />
-      <%= f.text_field :contact_type, :class => 'fullwidth title' %>
-      <%= f.error_message_on :contact_type %>
-    <% end %>
-	
-	<%= f.field_container :prefix do %>
-      <%= f.label :prefix, Spree.t(:contact_prefix) %> <span class="required">*</span><br />
-      <%= f.text_field :prefix, :class => 'fullwidth title' %>
-      <%= f.error_message_on :prefix %>
-    <% end %>
+	<%#= f.field_container :prefix do %>
+      <%#= f.label :prefix, Spree.t(:contact_prefix) %> <!--<span class="required">*</span><br />-->
+      <%##= f.text_field :prefix, :class => 'fullwidth title' %>
+      <%#= f.select :prefix, @prefix_names, {}, {:class => 'select2 fullwidth'} %>
+      <%#= f.error_message_on :prefix %>
+    <% #end %>
 	
     <div class="clearfix" data-hook="product-from-prototype" id="product-from-prototype">
       <%= render :file => 'spree/admin/prototypes/show' if @prototype %>
