@@ -7,7 +7,7 @@ models = [
 ]
 models.each do |model|
   model.class_eval do
-    belongs_to :tenant
+    belongs_to :store
     belongs_to_multitenant
   end
 end

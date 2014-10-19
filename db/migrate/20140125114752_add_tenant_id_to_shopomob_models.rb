@@ -8,8 +8,8 @@ class AddTenantIdToShopomobModels < ActiveRecord::Migration
         "spree_contacts",
     ]
     tables.each do |table|
-      add_column table, :tenant_id, :integer
-      add_index table, :tenant_id
+      add_column table, :store_id, :integer
+      add_index table, :store_id
     end
   end
 end

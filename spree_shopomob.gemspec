@@ -2,9 +2,9 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_shopomob'
-  s.version     = '2.1.3'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.version     = '2.4.0'
+  s.summary     = 'Add ShopoMob support to Spree'
+  s.description = 'Add ShopoMob support to Spree'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Dmitry Kosenko'
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.1.3'
+  s.add_dependency 'spree_core', '~> 2.4.0.rc3'
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
