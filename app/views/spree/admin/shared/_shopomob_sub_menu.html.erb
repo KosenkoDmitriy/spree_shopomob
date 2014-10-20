@@ -1,16 +1,16 @@
 <% content_for :sub_menu do %>
   <ul id="sub_nav" data-hook="admin_product_sub_tabs" class="inline-menu">
     <%#= tab :news, :match_path => '/news' %>
-	<%= tab :about, :url => '/admin/about' %>
-	<%= tab :news, :url => '/admin/news' %>
-    <%= tab :sync, :url => '/admin/sync' %>
-    <%= tab :sms, :url => '/admin/sms' %>
+	<%= tab :about, :url => '/admin/about', :label => Spree.t('sm.about') %>
+    <%= tab :contacts, :url => '/admin/contacts', :label => Spree.t('sm.listing_contacts') %>
+    <%= tab :news, :url => '/admin/news', :label => Spree.t('sm.news') %>
+    <%= tab :sms, :url => '/admin/sms', :label => Spree.t('sm.sms') %>
+    <%= tab :sync, :url => '/admin/sync', :label => Spree.t('sm.sync') %>
 
     <%#= tab :products, :url => '' %>
 	<%#= tab :orders, :url => '' %>
 	<%#= tab :wish_list, :url => '' %>
 		
-	<%= tab :contacts, :url => '/admin/contacts' %>
 	<%#= tab :map, :url => '' %>
 	<%#= tab :users, :url => '' %>
 	<%#= tab :stats, :url => '' %>

@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:sms) %>
+  <%= Spree.t("sm.sms") %>
 <% end %>
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:add_sms), new_object_url, :icon => 'icon-plus', :id => 'admin_new_order' %>
+    <%= button_link_to Spree.t("sm.add_sms"), new_object_url, :icon => 'icon-plus', :id => 'admin_new_order' %>
   </li>
 <% end if can? :edit, Spree::Sms.new %>
 
@@ -24,11 +24,11 @@
     <thead>
       <tr data-hook="admin_products_index_headers">
         <th>#</th>
-        <th> <%=Spree.t(:text)%></th>
-        <th> <%=Spree.t(:to)%></th>
-        <th> <%=Spree.t(:from)%></th>
-		<th> <%=Spree.t(:created_at)%></th>
-        <th> <%=Spree.t(:updated_at)%></th>
+        <th> <%=Spree.t("sm.text")%></th>
+        <th> <%=Spree.t("sm.to")%></th>
+        <th> <%=Spree.t("sm.from")%></th>
+		<th> <%=Spree.t("sm.created_at")%></th>
+        <th> <%=Spree.t("sm.updated_at")%></th>
         <th data-hook="admin_products_index_header_actions" class="actions"><%#=Spree.t(:table_actions)%><%#=Spree.t(:actions)%></th>
       </tr>
     </thead>
@@ -57,8 +57,8 @@
 </table>
 <% else %>
   <div class="alpha twelve columns no-objects-found">
-    <%= Spree.t(:no_sms_found) %>,
-    <%= link_to Spree.t(:add_one), new_object_url %>!
+    <%= Spree.t("sm.no_sms_found") %>,
+    <%= link_to Spree.t("add_one"), new_object_url %>!
   </div>
 <% end %>
 

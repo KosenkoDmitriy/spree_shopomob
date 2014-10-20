@@ -4,6 +4,7 @@
 en:
   hello: "Hello world"
   spree:
+    sm:
       news: "News"
       about: "About"
       title: "Title"

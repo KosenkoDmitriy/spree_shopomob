@@ -1,14 +1,14 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:sms) %>
+  <%= Spree.t("sm.sms") %>
 <% end %>
 
 <%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
 
 <% content_for :page_actions do %>
-  <li><%= button_link_to Spree.t(:back_to_sms_list), collection_url, :icon => 'icon-arrow-left' %></li>
+  <li><%= button_link_to Spree.t("sm.back_to_sms_list"), collection_url, :icon => 'icon-arrow-left' %></li>
   <% if can?(:create, Spree::Sms) %>
     <li id="new_product_link">
-      <%= button_link_to Spree.t(:add_sms), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+      <%= button_link_to Spree.t("sm.add_sms"), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
     </li>
   <% end %>
 <% end %>
@@ -17,7 +17,7 @@
 
 
 <fieldset data-hook="new_product">
-  <legend align="center"><%= Spree.t(:adding_sms) %></legend>
+  <legend align="center"><%= Spree.t("sm.adding_sms") %></legend>
     <%= render 'form', { :admin => @sms } %>
 
     <%#= form_for "Sms", :html => { :multipart => true } do |f| %>

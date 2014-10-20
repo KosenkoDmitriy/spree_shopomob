@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:about) %>
+  <%= Spree.t("sm.about") %>
 <% end %>
 
 <% content_for :page_actions do %>
@@ -9,7 +9,7 @@
 	      <%= button_link_to Spree.t(:edit), @edit_about_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
 	<% else %>
 	      <%= button_link_to Spree.t(:edit), new_admin_about_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
-	<% end if %>
+	<% end %>
   </li>
 <% end if can? :new, Spree::About.new %>
 

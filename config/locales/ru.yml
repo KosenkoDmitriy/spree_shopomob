@@ -4,15 +4,18 @@
 ru:
   hello: "Привет Мир"
   spree:
+    sm:
+      shopomob: ШопоМоб
       news: Новости
       about: О компании
       title: Загаловок
       text: Описание
       updated_at: Дата обновления
       created_at: Дата создания
-      cancel: Отмена
+      cancel: Отменить
       back: Назад
       new_contact: Добавить контакт
+      edit_contact: Изменить контакт
       listing_contacts: Контакты
       contact_name: Имя
       contact_value: Значение
@@ -51,5 +54,6 @@ ru:
 
       sync: Синхронизация данных
       new_sync: Создать синхронизацию
+      no_syncs: Нет синхронизаций
       edit_sync: Редактировать Синхронизацию
       back_to_sync_list: Назад ко всем синхронизациям

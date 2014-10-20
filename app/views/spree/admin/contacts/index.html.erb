@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:listing_contacts) %>
+  <%= Spree.t("sm.listing_contacts") %>
 <% end %>
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:new_contact), new_admin_contact_url, :icon => 'icon-plus', :id => 'admin_new_contact' %>
+    <%= button_link_to Spree.t("sm.new_contact"), new_admin_contact_url, :icon => 'icon-plus', :id => 'admin_new_contact' %>
   </li>
 <% end if can? :edit, Spree::Contact.new %>
 
@@ -25,10 +25,10 @@
     <thead>
       <tr data-hook="admin_products_index_headers">
         <th>#</th>
-        <th colspan="1"> <%=Spree.t(:contact_name)%></th>
-        <th> <%=Spree.t(:contact_value)%></th>
-		<th> <%=Spree.t(:contact_prefix)%></th>
-		<th> <%=Spree.t(:contact_type)%></th>
+        <th colspan="1"> <%=Spree.t("sm.contact_name")%></th>
+        <th> <%=Spree.t("sm.contact_value")%></th>
+		<th> <%=Spree.t("sm.contact_prefix")%></th>
+		<th> <%=Spree.t("sm.contact_type")%></th>
         <th data-hook="admin_products_index_header_actions" class="actions"><%#=Spree.t(:table_actions)%><%#=Spree.t(:actions)%></th>
       </tr>
     </thead>

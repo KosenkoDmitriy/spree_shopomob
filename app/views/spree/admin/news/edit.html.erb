@@ -1,12 +1,12 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:edit_news) %> "<%= @newsItem.try(:title) %>" 
+  <%= Spree.t("sm.edit_news") %> "<%= @newsItem.try(:title) %>"
 <% end %>
 
 <% content_for :page_actions do %>
-  <li><%= button_link_to Spree.t(:back_to_news_list), collection_url, :icon => 'icon-arrow-left' %></li>
+  <li><%= button_link_to Spree.t("sm.back_to_news_list"), collection_url, :icon => 'icon-arrow-left' %></li>
   <% if can?(:create, Spree::News) %>
     <li id="new_product_link">
-      <%= button_link_to Spree.t(:add_news), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+      <%= button_link_to Spree.t("sm.add_news"), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
     </li>
   <% end %>
 <% end %>
@@ -17,16 +17,16 @@
 <%= form_for [:admin, @newsItem], :html => { :multipart => true, :method => :put } do |f| %>
   <fieldset data-hook="new_product">
 
-    <legend align="center"><%= Spree.t(:edit_news) %></legend>
+    <legend align="center"><%= Spree.t("sm.edit_news") %></legend>
   
   <%= f.field_container :title do %>
-      <%= f.label :title, Spree.t(:title) %> <span class="required">*</span><br />
+      <%= f.label :title, Spree.t("sm.title") %> <span class="required">*</span><br />
       <%= f.text_field :title, :class => 'fullwidth title' %>
       <%= f.error_message_on :title %>
     <% end %>
 	
 	<%= f.field_container :text do %>
-      <%= f.label :text, Spree.t(:text) %>
+      <%= f.label :text, Spree.t("sm.text") %>
       <%= f.text_area :text, {:rows => 10, :class => 'fullwidth'} %>
       <%= f.error_message_on :text %>
     <% end %>

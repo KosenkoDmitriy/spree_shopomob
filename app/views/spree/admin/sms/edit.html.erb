@@ -1,12 +1,12 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:edit_sms) %>
+  <%= Spree.t("sm.edit_sms") %>
 <% end %>
 
 <% content_for :page_actions do %>
-  <li><%= button_link_to Spree.t(:back_to_sms_list), collection_url, :icon => 'icon-arrow-left' %></li>
+  <li><%= button_link_to Spree.t("sm.back_to_sms_list"), collection_url, :icon => 'icon-arrow-left' %></li>
   <% if can?(:create, Spree::Sms) %>
     <li id="new_product_link">
-      <%= button_link_to Spree.t(:add_sms), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
+      <%= button_link_to Spree.t("sm.add_sms"), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
     </li>
   <% end %>
 <% end %>
@@ -17,28 +17,28 @@
 <%= form_for [:admin, @sms], :url=> admin_sm_path, :html => { :multipart => true } do |f| %>
   <fieldset data-hook="new_product">
 
-    <legend align="center"><%= Spree.t(:edit_sms) %></legend>
+    <legend align="center"><%= Spree.t("sm.edit_sms") %></legend>
   
     <%= f.field_container :from do %>
-      <%= f.label :from, Spree.t(:from) %> <span class="required">*</span><br />
+      <%= f.label :from, Spree.t("sm.from") %> <span class="required">*</span><br />
       <%= f.text_field :from, :class => 'fullwidth from' %>
       <%= f.error_message_on :from %>
     <% end %>
 
     <%= f.field_container :to do %>
-        <%= f.label :to, Spree.t(:to) %> <span class="required">*</span><br />
+        <%= f.label :to, Spree.t("sm.to") %> <span class="required">*</span><br />
         <%= f.text_area :to, :class => 'fullwidth to' %>
         <%= f.error_message_on :to %>
     <% end %>
 
 	<%= f.field_container :text do %>
-      <%= f.label :text, Spree.t(:text) %> <span class="required">*</span>
+      <%= f.label :text, Spree.t("sm.text") %> <span class="required">*</span>
       <%= f.text_area :text, {:rows => 10, :class => 'fullwidth text'} %>
       <%= f.error_message_on :text %>
     <% end %>
 
     <%= f.field_container :userapp do %>
-        <%= f.label :userapp, Spree.t(:app_id) %> <span class="required">*</span>
+        <%= f.label :userapp, Spree.t("sm.app_id") %> <span class="required">*</span>
         <%= f.text_field :userapp, :class => 'fullwidth from' %>
         <%= f.error_message_on :userapp %>
     <% end %>
