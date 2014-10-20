@@ -1,3 +1,4 @@
+
 class AddTenantIdToShopomobModels < ActiveRecord::Migration
   def change
     tables = [
@@ -8,8 +9,11 @@ class AddTenantIdToShopomobModels < ActiveRecord::Migration
         "spree_contacts",
     ]
     tables.each do |table|
-      add_column table, :store_id, :integer
-      add_index table, :store_id
+      add_column table, :store_id, :integer, index: true
     end
+    #tables.each do |table|
+    #  add_column table, :store_id, :integer
+    #  add_index table, :store_id
+    #end
   end
 end
