@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '4.1.6'
+gem 'rails', '4.2.0'
 
 #group :production do
 	#gem 'spree', '2.1.3'
@@ -21,8 +21,11 @@ gem 'rails', '4.1.6'
 
 #gem 'spree', path: '../spree', branch: '2-1-stable'
 #gem 'spree', '2.1.3'
-gem 'spree', path: '../spree', branch: '2-4-stable'
-gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '2-4-stable'
+
+#gem 'spree', path: '../spree', branch: '2-4-stable'
+gem 'spree', :git => 'git://github.com/spree/spree.git', :branch => '3-0-stable'
+gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '3-0-stable'
+
 #gem 'spree_multi_tenant', path: '../spree_multi_tenant'#, branch: '2-4-stable'
 #gem 'spree_multi_tenant', git: 'git://github.com/KosenkoDmitriy/spree_multi_tenant.git', branch: '2-1-stable'
 #gem 'spree_multi_tenant', path: '../../spree/spree_repos/spree_multi_tenant_2.4_stable'
