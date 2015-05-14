@@ -1,8 +1,6 @@
 Spree::Core::Engine.routes.draw do
   # Add your extension routes here
-end
 
-Spree::Core::Engine.routes.append do
   namespace :admin do
     resources :about
     resources :news
@@ -17,12 +15,15 @@ Spree::Core::Engine.routes.append do
     resources :categories
 
   end
-  
+
   namespace :api, :defaults => { :format => 'json' } do
     resources :about
     resources :contacts
     resources :news
     resources :categories # product categories
+    match '/get_products_by_category_id/:id',    to: 'categories#get_products_by_category_id',    via: 'get'
+    #match '/get_products_by_category_id',    to: 'categories#products_by_category_id',    via: 'get'
+
   end
-  
+
 end

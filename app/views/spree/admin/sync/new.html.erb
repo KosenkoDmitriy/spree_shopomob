@@ -2,8 +2,6 @@
   <%= Spree.t("sm.new_sync") %>
 <% end %>
 
-<%= render :partial => 'spree/admin/shared/shopomob_sub_menu' %>
-
 <% content_for :page_actions do %>
   <li><%= button_link_to Spree.t("sm.back_to_sync_list"), collection_url, :icon => 'icon-arrow-left' %></li>
   <% if can?(:create, Spree::Sync) %>
