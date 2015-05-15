@@ -6,3 +6,6 @@ attributes :imageName, :key, :value, :prefix, :contact_type
 #node(:prefix) { @contact.prefix }
 #node(:type) { @contact.contact_type }
 
+child :picture do
+  attribute :id, :image_file_name, :image, :title, :image_url_thumb, :image_url
+end
