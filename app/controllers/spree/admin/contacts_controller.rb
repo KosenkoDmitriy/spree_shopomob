@@ -12,7 +12,20 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
       values = params['contact']['contact_type'].split(',')
       @item.contact_type = values[0]
       @item.prefix = values[1]
-      if @item.save
+      if @item.save!
+        if params[:images]
+          #===== The magic is here ;)
+          params[:images].each { |image|
+            @item.build_picture if @item.picture.blank?
+
+            @item.picture.image = image
+            @item.save!
+            #@item.picture.image.fil
+            #@item.picture.image = image#.create(image)
+            #@item.picture.image = image
+            #@item.save!
+          }
+        end
         redirect_to action:"index"
       else
         render :action => "new"
@@ -31,6 +44,9 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
     params.require(:contact).permit(:key, :value, :prefix, :contact_type)
   end
 
+  def image_params
+    params.require(:images).permit(:original_filename, :content_type, :headers)
+  end
 
   protected
   def load_contact_names
