@@ -5,6 +5,27 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
     @item = Spree::Contact.new
   end
 
+  def edit
+    @item = Spree::Contact.find(params[:id])
+  end
+
+  def update
+    @item = Spree::Contact.find(params[:id])
+
+    if @item.save
+      if params[:images]
+        params[:images].each { |image|
+          @item.build_picture if @item.picture.blank?
+          @item.picture.image = image
+          @item.save!
+        }
+      end
+      redirect_to action:"index"
+    else
+      render :action => "new"
+    end
+  end
+
   def create
     @item = Spree::Contact.new ( contact_params )
     #if (params['key'].present? && params['value'].present? && params['prefix'].present? && params['contact_type'].present?)
@@ -12,18 +33,12 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
       values = params['contact']['contact_type'].split(',')
       @item.contact_type = values[0]
       @item.prefix = values[1]
-      if @item.save!
+      if @item.save
         if params[:images]
-          #===== The magic is here ;)
           params[:images].each { |image|
             @item.build_picture if @item.picture.blank?
-
             @item.picture.image = image
             @item.save!
-            #@item.picture.image.fil
-            #@item.picture.image = image#.create(image)
-            #@item.picture.image = image
-            #@item.save!
           }
         end
         redirect_to action:"index"
