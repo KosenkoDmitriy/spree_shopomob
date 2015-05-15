@@ -5,20 +5,26 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
   helper_method :clone_object_url
   
   def index
-    @news = Spree::News.order("updated_at DESC")
+    @item = Spree::News.order("updated_at DESC")
   end
   
   def new
-    @newsItem = Spree::News.new
+    @item = Spree::News.new
   end
   
   def create
 #    @newsItem = News.create(:title=>params[:title], :text => params[:text])
     @params = params
-    @newsItem = Spree::News.new ( news_params )
-
-    if @newsItem.save
+    @item = Spree::News.new ( news_params )
+    if @item.save
       notify
+      if params[:images]
+        params[:images].each { |image|
+          #@item.build_pictures if @item.pictures.blank?
+          @item.pictures.create(image: image)
+          #@item.save!
+        }
+      end
       redirect_to action:"index"
     else
       render :action => "new"
@@ -27,11 +33,19 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
 
   def update
     if (params['id'].present? && !params['id'].blank?)
-      @newsItem = Spree::News.find(params['id'])
-      @newsItem.attributes = news_params
-      if @newsItem.save #Spree::News.update(params['id'], news_params)
+      @item = Spree::News.find(params['id'])
+      @item.attributes = news_params
+      if @item.save
         notify
-        redirect_to action:"index"
+        if params[:images]
+          #@item.build_pictures if @item.pictures.blank?
+          @item.pictures.delete_all
+          params[:images].each { |image|
+            @item.pictures.create(image: image)
+            #@item.save!
+          }
+        end
+        redirect_to action: "index"
       else
         render :action => "new"
       end
@@ -41,7 +55,7 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
   private
   
   def find_resource
-    @newsItem = Spree::News.find_by(:id => params[:id])
+    @item = Spree::News.find_by(:id => params[:id])
   end
       
   def news_params
@@ -53,7 +67,7 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
 #  end
 
   def location_after_save
-    spree.edit_admin_news_url(@newsItem)
+    spree.edit_admin_news_url(@item)
   end
 
   def clone_object_url resource
@@ -68,7 +82,7 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
       url = URI.parse('http://glacial-ridge-3064.herokuapp.com/notification/push/news')
       request = Net::HTTP::Post.new(url.path)
       request.content_type = 'application/json'
-      data = {'title' => @newsItem.title, 'text' => @newsItem.text, 'app'=> {'android'=>'name.adec.android.shop', 'ios'=>'name.adec.ios.shop'}}
+      data = {'title' => @item.title, 'text' => @item.text, 'app'=> {'android'=>'name.adec.android.shop', 'ios'=>'name.adec.ios.shop'}}
       request.body = data.to_json
       response = Net::HTTP.start(url.host, url.port) {|http| http.request(request) }
       flash[:notice] = Spree.t('news_sent')
@@ -76,7 +90,7 @@ class Spree::Admin::NewsController < Spree::Admin::ResourceController
     rescue Errno::EHOSTUNREACH
       flash[:error] = Spree.t('news_server_not_available') + ". " + Spree.t('news_not_sent') + "."
         # log the error
-        # let the User know
+        # let the User @item
     rescue
       # handle other exceptions
       flash[:error] = Spree.t('unknown_error') + ". " + Spree.t('news_not_sent') + "."
