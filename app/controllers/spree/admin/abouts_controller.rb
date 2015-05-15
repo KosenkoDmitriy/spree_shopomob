@@ -18,10 +18,11 @@ class Spree::Admin::AboutsController < Spree::Admin::ResourceController
 
     if @item.save
       if params[:images]
+        #@item.build_pictures if @item.pictures.blank?
+        @item.pictures.delete_all
         params[:images].each { |image|
-          @item.build_pictures if @item.pictures.blank?
           @item.pictures.create(image: image)
-          @item.save!
+          #@item.save!
         }
       end
       redirect_to action: "index"

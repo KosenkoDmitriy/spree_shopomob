@@ -18,7 +18,7 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
         params[:images].each { |image|
           @item.build_picture if @item.picture.blank?
           @item.picture.image = image
-          @item.save!
+          @item.picture.save!
         }
       end
       redirect_to action:"index"
