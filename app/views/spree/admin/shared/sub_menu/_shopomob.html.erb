@@ -1,10 +1,10 @@
 <ul data-hook="admin_shopomob_sidebar_menu" class="collapse nav nav-pills nav-stacked" id="sidebar-shopomob">
   <%#= tab :news, :match_path => '/news' %>
-  <%= tab :about, :url => '/admin/about', :label => Spree.t('sm.about') %>
-  <%= tab :contacts, :url => '/admin/contacts', :label => Spree.t('sm.listing_contacts') %>
-  <%= tab :news, :url => '/admin/news', :label => Spree.t('sm.news') %>
-  <%= tab :sms, :url => '/admin/sms', :label => Spree.t('sm.sms') %>
-  <%= tab :sync, :url => '/admin/sync', :label => Spree.t('sm.sync') %>
+  <%= tab :about, :url => admin_abouts_url, :label => Spree.t('sm.about') %>
+  <%= tab :contacts, :url => admin_contacts_url, :label => Spree.t('sm.listing_contacts') %>
+  <%= tab :news, :url => "/admin/news", :label => Spree.t('sm.news') %>
+  <%= tab :sms, :url => admin_sms_url, :label => Spree.t('sm.sms') %>
+  <%= tab :sync, :url => "/admin/sync", :label => Spree.t('sm.sync') %>
 
   <%#= tab :products, :url => '' %>
   <%#= tab :orders, :url => '' %>

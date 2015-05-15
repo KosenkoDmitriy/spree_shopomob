@@ -12,7 +12,11 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
   def update
     @item = Spree::Contact.find(params[:id])
     @item.attributes = contact_params
-
+    if (params['contact']['key'].present? && params['contact']['value'].present? && params['contact']['contact_type'].present?)
+      values = params['contact']['contact_type'].split(',')
+      @item.contact_type = values[0]
+      @item.prefix = values[1]
+    end
     if @item.save
       if params[:images]
         params[:images].each { |image|
