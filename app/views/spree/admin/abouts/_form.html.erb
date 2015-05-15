@@ -1,0 +1,22 @@
+<p class="review_title_field">
+<%= f.label :title %>
+<%= f.text_field :title, :class => 'fullwidth title'%>
+</p>
+<p class="review_text_field">
+<%= f.label :text %>
+<%= f.text_area :text, {:rows => 10, :class => 'fullwidth'} %>
+</p>
+
+<div class="control-group">
+  <%= f.label :pictures, :class => 'control-label' %>
+  <div class="controls">
+    <!-- The magic is coming ...look at my eyes....shazammmm -->
+    <!-- Use HTML5 multiple attribute to enable multiple selection
+         and pass back to controller all files as an array, ready
+         for paperclip!!
+         file_field_tag, since images is not a gallery attribute
+     -->
+    <%= file_field_tag "images[]", type: :file, multiple: true %>
+  </div>
+</div>
+<br>

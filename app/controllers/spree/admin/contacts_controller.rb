@@ -11,6 +11,7 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
 
   def update
     @item = Spree::Contact.find(params[:id])
+    @item.attributes = contact_params
 
     if @item.save
       if params[:images]
@@ -57,10 +58,6 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
 
   def contact_params
     params.require(:contact).permit(:key, :value, :prefix, :contact_type)
-  end
-
-  def image_params
-    params.require(:images).permit(:original_filename, :content_type, :headers)
   end
 
   protected

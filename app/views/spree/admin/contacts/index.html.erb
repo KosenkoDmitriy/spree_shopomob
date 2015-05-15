@@ -8,6 +8,7 @@
 <% end if can? :edit, Spree::Contact.new %>
 
 <%#=debug(@contacts)%>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @about } %>
 
 <% if !@contacts.empty? %>
 <div id="new_product_wrapper" data-hook></div>

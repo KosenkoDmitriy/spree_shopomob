@@ -2,7 +2,7 @@ Spree::Core::Engine.routes.draw do
   # Add your extension routes here
 
   namespace :admin do
-    resources :about
+    resources :abouts
     resources :news
     resources :contacts
     resources :sms

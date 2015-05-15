@@ -8,5 +8,7 @@
 
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @item } %>
 
-<%= render :file => 'spree/admin/contacts/_form' if @item %>
-
+<%= form_for [:admin, @item], :html => { :class => 'form-horizontal', multipart: true } do |f| %>
+    <%= render :file => 'spree/admin/contacts/_form' , :locals => { :f => f } if @item %>
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+<% end %>

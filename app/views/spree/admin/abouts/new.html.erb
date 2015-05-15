@@ -1,7 +1,7 @@
 <div class="content-header  page-header">
   <div class="row">
     <h1 class="col-sm-12">
-      <a href="<%=admin_contacts_path%>"><%=Spree.t("spree.sm.edit_contact")%></a>/<%=Spree.t("spree.sm.new_contact")%>
+      <a href="<%=admin_abouts_path%>"><%=Spree.t("spree.sm.about")%></a>/<%=Spree.t("spree.sm.new_about")%>
     </h1>
   </div>
 </div>
@@ -9,6 +9,6 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @item } %>
 
 <%= form_for [:admin, @item], :html => { :class => 'form-horizontal', multipart: true } do |f| %>
-    <%= render :file => 'spree/admin/contacts/_form' , :locals => { :f => f } if @item %>
-    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+    <%= render :file => 'spree/admin/abouts/_form' , :locals => { :f => f } if @item  %>
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
 <% end %>
