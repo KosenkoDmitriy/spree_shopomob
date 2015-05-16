@@ -5,9 +5,9 @@ class Spree::Api::CategoriesController < Spree::Api::BaseController
     if (id > 0)
       if (Spree::Taxonomy.exists?(id))
         @taxonomy = Spree::Taxonomy.find(id)
-        @taxons = Spree::Taxon.where(taxonomy_id: @taxonomy.id, parent_id: @taxonomy.id).order(:name, :lft)
+        @taxons = Spree::Taxon.where(taxonomy_id: @taxonomy.id, parent_id: @taxonomy.id)#.order(:name, :lft) #commented order because {"exception":"SQLite3::SQLException: no such column: spree_taxon_translations.name: SELECT \"spree_taxons\".* FROM \"spree_taxons\" WHERE \"spree_taxons\".\"taxonomy_id\" = ? AND \"spree_taxons\".\"parent_id\" = ?  ORDER BY spree_taxon_translations.name"}
       else
-        @taxons = Spree::Taxon.where(taxonomy_id: id, parent_id: id).order(:name, :lft)
+        @taxons = Spree::Taxon.where(taxonomy_id: id, parent_id: id)#.order(:name, :lft) #commented order because {"exception":"SQLite3::SQLException: no such column: spree_taxon_translations.name: SELECT \"spree_taxons\".* FROM \"spree_taxons\" WHERE \"spree_taxons\".\"taxonomy_id\" = ? AND \"spree_taxons\".\"parent_id\" = ?  ORDER BY spree_taxon_translations.name"}
       end
     elsif (id == 0)
       @taxons = Spree::Taxon.where(parent_id:nil)

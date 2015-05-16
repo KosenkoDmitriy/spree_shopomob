@@ -4,6 +4,6 @@ node(:imageName) { @about.imageName }
 node(:title) { @about.title }
 node(:text) { @about.text }
 
-child(@about.pictures => :pictures) do
+child(@about.pictures => :images) do
   attribute :id, :image_file_name, :image, :title, :image_url_thumb, :image_url
 end

@@ -39,7 +39,7 @@
 		<tr>
 			<td><%= @no+=1 %> <%#= newsItem.try(:id) %></td>
 			<td><%= link_to newsItem.try(:key), edit_admin_news_path(newsItem) %></td>
-            <td class="align-center"><%= newsItem.try(:value) %></td>
+            <td class="align-center"><%= newsItem.try(:value).try(:truncate, 100) %></td>
 			<td><%= newsItem.try(:prefix) %></td>
             <td><%= newsItem.try(:contact_type) %></td>
             <td><%= image_tag newsItem.try(:picture).try(:image).try(:url, :thumb), style: "height:50px" %></td>

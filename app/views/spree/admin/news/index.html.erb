@@ -35,8 +35,8 @@
 		<%- @item.each do |newsItem|%>
 		<tr>
 			<td><%= newsItem.try(:id) %></td>
-			<td><%= link_to newsItem.try(:title), edit_admin_news_path(newsItem) %></td>
-            <td class="align-center"><%= newsItem.text %></td>
+			<td><%= link_to newsItem.try(:title).try(:truncate, 100), edit_admin_news_path(newsItem) %></td>
+            <td class="align-center"><%= newsItem.text.try(:truncate, 200) %></td>
 			<td><%= newsItem.try(:created_at) %></td>
 			<td><%= newsItem.try(:updated_at) %></td>
             <td><%= image_tag newsItem.try(:pictures).try(:first).try(:image).try(:url, :thumb) %></td>
