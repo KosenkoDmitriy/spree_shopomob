@@ -66,7 +66,7 @@ class Spree::Admin::ContactsController < Spree::Admin::ResourceController
 
   protected
   def load_contact_names
-    @contact_types = [ ["phone for call", "tel:,call"], ["phone for sms", "tel:,sms"], ["email main", "mailto:,"], ["email second (cc)", "mailto:,cc"], ["skype", "skype:,call"], ["web url", "http://,url"], ["map", "http://,url"] ]
+    @contact_types = [ ["phone for call", "tel:,call"], ["phone for sms", "tel:,sms"], ["email main", "mailto:,"], ["email second (cc)", "mailto:,cc"], ["skype", "skype:,call"], ["web url", "http://,url"], ["map", "http://,url"], ["time_work", "tw,tw"] ]
     #<%= select_tag(:option, options_for_select([['All', 1], ['Co', 2], ['Bought', 3], ['View', 4], ['Top API', 5]], :selected => params[:option])) %>
 
     #@prefix_names = {"for phone for call"=>"call", "for sms" => "sms", "for skype" => "call", "for main email" => "", "for email (cc)" => "cc", "for web url" => "url" }
