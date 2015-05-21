@@ -23,6 +23,8 @@ Spree::Core::Engine.routes.draw do
     resources :categories # product categories
     match '/get_products_by_category_id/:id',    to: 'categories#get_products_by_category_id',    via: 'get'
     #match '/get_products_by_category_id',    to: 'categories#products_by_category_id',    via: 'get'
+    match '/is_online',    to: 'about#is_online',    via: 'get'
+    match '/get_products_and_cats',    to: 'categories#get_products_and_cats',    via: 'get'
 
   end
 

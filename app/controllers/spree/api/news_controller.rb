@@ -5,7 +5,11 @@ class Spree::Api::NewsController < Spree::Api::BaseController
     if (limit1 > 0)
       limit1 = limit1*limit2
     end
-    @news = Spree::News.order(:updated_at).offset(limit1).limit(limit2)#.reverse
+    if (limit2 > 0)
+      @news = Spree::News.order(:updated_at).offset(limit1).limit(limit2).reverse
+    else
+      @news = Spree::News.order(:updated_at).reverse
+    end
     @total_count = Spree::News.count
 #    respond_with(@news)
   end

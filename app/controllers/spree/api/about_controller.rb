@@ -5,6 +5,12 @@ class Spree::Api::AboutController < Spree::Api::BaseController
 #    respond_with(@about)
 
   end
+
+  def is_online
+    #respond_with("true")
+    #return;
+    @is_online ="true"
+  end
 end
 
 

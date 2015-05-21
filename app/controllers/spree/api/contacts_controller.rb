@@ -7,7 +7,7 @@ class Spree::Api::ContactsController < Spree::Api::BaseController
   end
   
   def show
-    @contact = Spree::Contact.last
+    @contact = Spree::Contact.find(params[:id])
 #    respond_with(contact)
   end
   
